@@ -22,6 +22,23 @@ public class DividendApplication {
 
 			Elements eles = document.getElementsByAttributeValue("data-test", "historical-prices");
 			Element ele = eles.get(0);
+
+			Element tbody = ele.children().get(1);
+			for(Element e: tbody.children()){
+				String txt = e.text();
+				if(!txt.endsWith("Dividend")){
+					continue;
+				}
+				String[] splits = txt.split(" ");
+				String month = splits[0];
+				int day = Integer.valueOf(splits[1].replace(",", ""));
+				int year = Integer.valueOf(splits[2]);
+				String dividend = splits[3];
+
+
+			}
+
+
 		} catch (IOException e){
 			e.printStackTrace();
 		}
