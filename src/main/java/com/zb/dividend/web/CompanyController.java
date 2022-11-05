@@ -1,11 +1,16 @@
 package com.zb.dividend.web;
 
 import com.zb.dividend.model.Company;
+import com.zb.dividend.persist.entity.CompanyEntity;
 import com.zb.dividend.service.CompanyService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.data.domain.Pageable;
+import java.util.List;
 
 @RestController
 @RequestMapping("/company")
@@ -19,8 +24,9 @@ public class CompanyController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> searchCompany(){
-        return null;
+    public ResponseEntity<?> searchCompany(Pageable pageable){
+        Page<CompanyEntity> companies = this.companyService.getAllCompany(pageable);
+        return ResponseEntity.ok(companies);
     }
 
     @PostMapping("")
